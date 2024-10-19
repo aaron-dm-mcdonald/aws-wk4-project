@@ -26,3 +26,6 @@ variable "us-east-1-linux" {
   default = "ami-06b21ccaeff8cd686"
 }
 
+variable "ec2-key" {
+  default = "tf-key-test"
+}
