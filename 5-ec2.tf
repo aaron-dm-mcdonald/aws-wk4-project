@@ -8,7 +8,7 @@ resource "aws_instance" "public_web_server" {
   user_data = file("${path.module}/scripts/ec2startup.sh")
 
   tags = {
-    Name = "public-web-server-1"
+    Name = "prod-web-server"
   }
   #depends_on = [null_resource.create_key_pair-1]  # Ensure the key pair is created before launching the instance
 }
@@ -22,7 +22,7 @@ resource "aws_instance" "windows_ec2" {
   key_name               = var.ec2-key
 
   tags = {
-    Name = "public-windows-bastion"
+    Name = "prod-windows-bastion"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_instance" "linux_ec2" {
   user_data = templatefile("${path.module}/scripts/private-startup.sh.tpl", {bucket_name = aws_s3_bucket.bucket.bucket}) # Updated path
 
   tags = {
-    Name = "Private-web-server-1"
+    Name = "dev-web-server"
   }
 
    # Attach the IAM role
@@ -61,4 +61,20 @@ resource "aws_ec2_instance_connect_endpoint" "endpoint" {
   tags = {
     Name = "tf-endpoint"
   }
+}
+
+
+
+
+resource "aws_instance" "test_web_server" {
+  ami                    = var.us-east-1-linux
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.private_test_subnet.id
+  vpc_security_group_ids = [aws_security_group.test_linux_sg.id] # Use 'id' instead of 'name' dummy
+  key_name               = var.ec2-key                           
+
+  tags = {
+    Name = "test-server"
+  }
+  
 }

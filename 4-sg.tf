@@ -123,3 +123,38 @@ resource "aws_security_group" "private_linux_sg" {
     Name = "tf-linux-private"
   }
 }
+
+
+##########################
+
+resource "aws_security_group" "test_linux_sg" {
+  name   = "test-linux-sg"
+  vpc_id = aws_vpc.vpc3.id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # SSH from anywhere
+  }
+
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp" # Ping from Windows EC2
+    cidr_blocks = [aws_subnet.public_subnet.cidr_block, aws_subnet.private_subnet.cidr_block]
+  }
+
+  # Add egress rule to allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"          # All protocols
+    cidr_blocks = ["0.0.0.0/0"] # Allow all outbound traffic
+  }
+
+  tags = {
+    Name = "tf-linux-private"
+  }
+}

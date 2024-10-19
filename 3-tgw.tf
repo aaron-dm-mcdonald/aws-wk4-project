@@ -13,3 +13,9 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "vpc2_attach" {
   vpc_id             = aws_vpc.vpc2.id
   subnet_ids         = [aws_subnet.private_subnet.id]
 }
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "vpc3_attach" {
+  transit_gateway_id = aws_ec2_transit_gateway.tgw.id
+  vpc_id             = aws_vpc.vpc3.id
+  subnet_ids         = [aws_subnet.private_test_subnet.id]
+}

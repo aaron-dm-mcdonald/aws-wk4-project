@@ -3,7 +3,7 @@ resource "aws_vpc" "vpc1" {
   cidr_block = var.vpc1_cidr
 
   tags = {
-    Name = "tf-public-vpc" # Name tag for the VPC
+    Name = "tf-prod-vpc" # Name tag for the VPC
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_route_table" "public_route_table" {
 
   # Route to the Private VPC via Transit Gateway
   route {
-    cidr_block         = var.vpc2_cidr                  # Route to the Private VPC via Transit Gateway
+    cidr_block         = "10.0.0.0/8"                       # Route to the Private VPC via Transit Gateway
     transit_gateway_id = aws_ec2_transit_gateway.tgw.id # Route to the Transit Gateway
   }
 
