@@ -39,6 +39,7 @@ terraform.rc
 
 # lock files
 *.terraform.lock.hcl.*
+.terraform.lock.hcl
 
 # Ignore keys
 *.json 
