@@ -1,6 +1,6 @@
 # Class 6, Week 4 Project
 
-## Overview
+## Infrastructure Overview
 
 This infrastructure (using AWS) contains the following:
 - Network Infrastructure 
@@ -24,6 +24,15 @@ This infrastructure (using AWS) contains the following:
         - Private Web Server: Has S3 endpoint gateway and IAM roles to access S3. Contains a startup script for local install of httpd.
    - Windows: A single bastion host with no further configuration except it utilizes a t2.large machine type for the performance requirements of windows   
 
+## Configuration Overview
+1) We need to get needed packages for apache2 for an instance with no internet access
+    - We will make an S3 bucket and add IAM permissons for the EC2
+    - Terraform will upload these packages into the S3 bucket 
+    - Finally ```yum localinstall``` and ```aws s3 cp``` will be used to get the packages to the EC2 instance 
+
+2) We will need to create a key pair for all EC2 instances 
+
+3) We will show the transit gateway's functionality using the windows bastion host to access the private web server
 
 ## Setup Directions 
 
