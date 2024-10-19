@@ -8,34 +8,6 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
-# Disable Block Public Access for the bucket
-resource "aws_s3_bucket_public_access_block" "bucket_public_access_block" {
-  bucket = aws_s3_bucket.bucket.id
-
-  block_public_acls   = false
-  block_public_policy = false
-  ignore_public_acls  = false
-  restrict_public_buckets = false
-}
-
-# Bucket Policy to Allow Public Access
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = aws_s3_bucket.bucket.id
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = "*",
-        Action = "s3:GetObject",
-        Resource = "${aws_s3_bucket.bucket.arn}/*"
-      }
-    ]
-  })
-}
-
-##########################################
 
 
 
@@ -49,7 +21,6 @@ resource "aws_s3_object" "httpd-rpm" {
 }
 
 
-###########################################
 
 
 

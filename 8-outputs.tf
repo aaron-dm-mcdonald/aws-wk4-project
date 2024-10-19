@@ -1,10 +1,23 @@
-# output "windows_ec2_public_ip" {
-#   value = aws_instance.windows_ec2.public_ip
-# }
+resource "null_resource" "log_all" {
+  provisioner "local-exec" {
+    command = <<EOF
+      echo "----- Starting Terraform Run: "figure how to insert date here" -----" >> log.txt
 
-# output "linux_ec2_private_ip" {
-#   value = aws_instance.linux_ec2.private_ip
-# }
+      cat <<EOT >> log.txt
+      
+      SAMPLE LOG INFO
+      Additional details can be added here.
+      
+      EOT
+  EOF
+      
+    
+  }
+}
+
+
+
+##################################
 
 
 # Key Pair Managment (I'm confident I did this the most roundabout way possible)
@@ -17,7 +30,7 @@
 #     EOT
 #   }
 
-# Optional: trigger to ensure this runs only once
+#  trigger to ensure this runs only once
 #   triggers = {
 #     key_pair_name = "tf-key"
 #   }

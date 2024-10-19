@@ -49,7 +49,7 @@ resource "aws_instance" "linux_ec2" {
    # Attach the IAM role
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
-  depends_on = [ aws_s3_object.httpd-rpm, aws_s3_bucket_policy.bucket_policy, aws_s3_bucket_public_access_block.bucket_public_access_block ]
+  depends_on = [ aws_s3_object.httpd-rpm, aws_iam_role.ec2_role ]
 }
 
 # Create EC2 Instance Connect Endpoint
