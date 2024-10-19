@@ -28,8 +28,8 @@ This infrastructure (using AWS) contains the following:
 ## Setup Directions 
 
 1) Clone Repo
-    - Open a terminal and run: ```git clone ```
-    - Open the directory that is created: ```cd ```
+    - Open a terminal and run: ```git clone https://github.com/aaron-dm-mcdonald/aws-wk4-project.git```
+    - Open the directory that is created: ```cd aws-wk4-project```
     - Open VS Code: ```code .```
 
 2) Generate a key pair (might be unneeded if you have one you want to use or the provisoner starts to work)
