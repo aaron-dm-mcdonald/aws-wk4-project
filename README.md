@@ -27,7 +27,24 @@ This infrastructure (using AWS) contains the following:
 
 ## Setup Directions 
 
-Working on this... 
+1) Clone Repo
+    - Open a terminal and run: ```git clone ```
+    - Open the directory that is created: ```cd ```
+    - Open VS Code: ```code .```
+
+2) Generate a key pair (might be unneeded if you have one you want to use or the provisoner starts to work)
+    - ```aws ec2 create-key-pair --key-name tf-key-test --query 'KeyMaterial' --output text  > tf-key-test.pem --region us-east-1```
+
+3) Download needed packages for RPM
+    - Make the script executable: ```chmod +x scripts/download-httpd.sh```
+    - Execute the script: ```./scripts/download-httpd.sh```
+    - Verify a directory called 'rpm_packages' is created in your working directory
+
+4) Time to run Terraform
+    - Initalize terraform and needed providers: ```terraform init```
+    - Generate execution plan: ```terraform plan```
+    - Apply the configuration: ```terraform apply -auto-approve```
+    - Verify Infrastructure creation: ```terraform state list```
 
 
 ## Project Structure
